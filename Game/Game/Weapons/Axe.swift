@@ -4,3 +4,4 @@ class Axe: Weapon {
     }
 }
 
+var axe = Axe()

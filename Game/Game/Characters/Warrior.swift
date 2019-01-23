@@ -4,4 +4,4 @@ class Warrior: Characters {
     }
 }
 
-var sword = Sword()
+var warrior = Warrior(name: "")

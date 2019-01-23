@@ -3,3 +3,5 @@ class MagicWand: Weapon {
         super.init(weaponName: "magic wand", damage: -20)
     }
 }
+
+var magicWand = MagicWand()

@@ -4,4 +4,4 @@ class Wizard: Characters {
     }
 }
 
-var magicWand = MagicWand()
+var wizard = Wizard(name: "")

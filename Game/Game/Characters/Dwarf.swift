@@ -4,4 +4,4 @@ class Dwarf: Characters {
     }
 }
 
-var axe = Axe()
+var dwarf = Dwarf(name: "")

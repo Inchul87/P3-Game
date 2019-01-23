@@ -1,9 +1,9 @@
-//
-//  main.swift
-//  Game
-//
-//  Created by Yoan AVISSE on 16/01/2019.
-//  Copyright © 2019 Yoan Avisse. All rights reserved.
-//
+// P3 Game
 
-import Foundation
+let game = Game()
+game.welcomeMessage()
+team1.namePlayer1()
+team1.createTeam()
+team2.namePlayer2()
+team2.createTeam()
+

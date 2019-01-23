@@ -4,4 +4,4 @@ class Giant: Characters {
     }
 }
 
-var hammer = Hammer()
+var giant = Giant(name: "")
