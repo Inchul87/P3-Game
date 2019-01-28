@@ -11,3 +11,4 @@ class Characters {
         self.type = type
     }
 }
+// print specs 

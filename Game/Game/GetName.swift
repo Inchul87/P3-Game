@@ -1,6 +1,5 @@
 class GetName {
     var characterName: [String] = []
-    let display = GetName()
     
     func nameCharacter() -> String {
         var nameChoice = ""

@@ -1,6 +1,6 @@
 class Player {
     var playerName: String
-    var teamSelection = [Int: Characters]()
+    var teamSelection = [Int: Characters]() // Tableau
     
     init(playerName: String) {
         self.playerName = playerName
@@ -43,7 +43,7 @@ class Player {
                 }
             } while teamChoice != 1 && teamChoice != 2 && teamChoice != 3 && teamChoice != 4
             
-            let nameChoice = GetName().display.nameCharacter()
+            let nameChoice = GetName().nameCharacter()
             
             switch teamChoice {
             case 1:
@@ -62,8 +62,26 @@ class Player {
                 print("Please select one character !")
             }
         }
+    
+    func displayCharactersSpecs() {
+        print ("Thanks ! \(team1.playerName) has selected :")
+        
+        
+        for (key, value) in team1.teamSelection {
+            team1.teamSelection = [Int : Characters](uniqueKeysWithValues: team1.teamSelection.sorted{ $0.key < $1.key })
+            
+            print("\(key) A \(value.type) named \(value.charactersName)) \(value.weapon.weaponName) and has \(value.healthPoints) lifePoints !")
+    }
+        print("\(team2.playerName) has selected :")
+        
+        for (key, value) in team2.teamSelection {
+            team2.teamSelection = [Int : Characters](uniqueKeysWithValues: team2.teamSelection.sorted{ $0.key < $1.key })
+            
+            print("\(key) A \(value.type) named \(value.charactersName)) \(value.weapon.weaponName) and has \(value.healthPoints) lifePoints !")
+            }
+        }
     }
 }
-
+    
 var team1 = Player(playerName: "")
 var team2 = Player(playerName: "")
