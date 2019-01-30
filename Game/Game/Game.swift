@@ -1,3 +1,5 @@
+import Foundation
+
 class Game {
     var characterA: Characters
     var characterB: Characters
@@ -58,7 +60,123 @@ class Game {
                     break
                 }
             }
+    
+        print("Which one do you want to fight ?")
+        team2.specsTeam2()
+        
+        if let characterTeam2 = readLine() {
+            switch characterTeam2 {
+            case "1":
+                print("Got it ! You will fight his warrior !")
+                characterB = team2.teamSelection[1]!
+                characterA.fightForTeam1(characterB: characterB)
+                if characterB.healthPoints < 1 {
+                    team2.teamSelection.removeValue(forKey: 1)
+                    team2.checkScoreTeam2()
+                } else {
+                    print("It's your turn \(team2.playerName) !")
+                }
+            case "2":
+                print("Got it ! You will fight his giant !")
+                characterB = team2.teamSelection[2]!
+                characterA.fightForTeam1(characterB: characterB)
+                if characterB.healthPoints < 1 {
+                    team2.teamSelection.removeValue(forKey: 2)
+                    team2.checkScoreTeam2()
+                } else {
+                    print("It's your turn \(team2.playerName) !")
+                }
+            case "3":
+                print("Got it ! You will fight his dwarf !")
+                characterB = team2.teamSelection[3]!
+                characterA.fightForTeam1(characterB: characterB)
+                if characterB.healthPoints < 1 {
+                    team2.teamSelection.removeValue(forKey: 3)
+                    team2.checkScoreTeam2()
+                } else {
+                    print("It's your turn \(team2.playerName) !")
+                }
+            default:
+                break
+            }
         }
+    }
+    
+    func fightChoiceTeam2() {
+        print("Please select one character to fight with !")
+        team2.specsTeam2()
+        
+        if let fighterTeam2 = readLine() {
+            switch fighterTeam2 {
+            case "1":
+                if team2.teamSelection[1] == nil {
+                    print("Sorry you can't select this character !")
+                    fightChoiceTeam2()
+                }else{
+                    print("You have selected your warrior !")
+                    characterC = team2.teamSelection[1]!
+                }
+            case "2":
+                if team2.teamSelection[2] == nil {
+                    print("Sorry you can't select this character !")
+                    fightChoiceTeam2()
+                }else{
+                    print("You have selected your giant !")
+                    characterA = team1.teamSelection[2]!
+                }
+            case "3":
+                if team2.teamSelection[3] == nil {
+                    print("Sorry you can't select this character !")
+                    fightChoiceTeam2()
+                }else{
+                    print("You have selected your dwarf !")
+                    characterC = team2.teamSelection[3]!
+                }
+            default:
+                break
+            }
+        }
+        
+        print("Which one do you want to fight ?")
+        team1.specsTeam1()
+        
+        if let characterTeam1 = readLine() {
+            switch characterTeam1 {
+            case "1":
+                print("Got it ! You will fight his warrior !")
+                characterD = team1.teamSelection[1]!
+                characterC.fightForTeam2(characterD: characterD)
+                if characterD.healthPoints < 1 {
+                    team1.teamSelection.removeValue(forKey: 1)
+                    team1.checkScoreTeam1()
+                } else {
+                    print("It's your turn \(team1.playerName) !")
+                }
+            case "2":
+                print("Got it ! You will fight his giant !")
+                characterD = team1.teamSelection[2]!
+                characterC.fightForTeam2(characterD: characterD)
+                if characterD.healthPoints < 1 {
+                    team1.teamSelection.removeValue(forKey: 2)
+                    team1.checkScoreTeam1()
+                } else {
+                    print("It's your turn \(team1.playerName) !")
+                }
+            case "3":
+                print("Got it ! You will fight his dwarf !")
+                characterD = team1.teamSelection[3]!
+                characterC.fightForTeam2(characterD: characterD)
+                if characterD.healthPoints < 1 {
+                    team1.teamSelection.removeValue(forKey: 3)
+                    team1.checkScoreTeam1()
+                } else {
+                    print("It's your turn \(team1.playerName) !")
+                }
+            default:
+                break
+            }
+        }
+    }
     
     func healChoiceTeam1() {
         print("Please select the character you want to heal !")
@@ -106,41 +224,49 @@ class Game {
                 break
             }
         }
+    }
     
-        print("Who do you want to attack ?")
+    func healChoiceTeam2() {
+        print("Please select the character you want to heal !")
         team2.specsTeam2()
         
-        if let characterTeam2 = readLine() {
-            switch characterTeam2 {
+        if let answer = readLine() {
+            switch answer {
             case "1":
-                print("Got it ! You will fight his warrior !")
-                characterB = team2.teamSelection[1]!
-                characterA.fightForTeam1(characterB: characterB)
-                if characterB.healthPoints < 1 {
-                    team2.teamSelection.removeValue(forKey: 1)
-                    team2.checkScoreTeam2()
+                print("Your warrior will be healed !")
+                if team2.teamSelection[1] == nil {
+                    print("Sorry your warrior is dead !")
                 } else {
-                    print("It's your turn \(team2.playerName) !")
+                    team2.teamSelection[1]!.healthPoints = team2.teamSelection[1]!.healthPoints + potion.damage
+                    if  team2.teamSelection[1]!.healthPoints >= 100 {
+                        print("Sorry your warrior can't have more than 100 lifePoints !")
+                        team2.teamSelection[1]!.healthPoints = 100
+                        print("Your warrior has now \(team2.teamSelection[1]!.healthPoints) lifePoints !")
+                    }
                 }
             case "2":
-                print("Got it ! You will fight his giant !")
-                characterB = team2.teamSelection[2]!
-                characterA.fightForTeam1(characterB: characterB)
-                if characterB.healthPoints < 1 {
-                    team2.teamSelection.removeValue(forKey: 2)
-                    team2.checkScoreTeam2()
+                print("Your giant will be healed !")
+                if team2.teamSelection[2] == nil {
+                    print("Sorry your giant is dead !")
                 } else {
-                    print("It's your turn \(team2.playerName) !")
+                    team2.teamSelection[2]!.healthPoints = team2.teamSelection[2]!.healthPoints + potion.damage
+                    if  team2.teamSelection[2]!.healthPoints >= 80 {
+                        print("Sorry your giant can't have more than 80 lifePoints !")
+                        team2.teamSelection[2]!.healthPoints = 80
+                        print("Your colossus has now \(team2.teamSelection[2]!.healthPoints) lifePoints !")
+                    }
                 }
-            case "3":
-                print("Got it ! You will fight his dwarf !")
-                characterB = team2.teamSelection[3]!
-                characterA.fightForTeam1(characterB: characterB)
-                if characterB.healthPoints < 1 {
-                    team2.teamSelection.removeValue(forKey: 3)
-                    team2.checkScoreTeam2()
+            case "3" :
+                print("Your dwarf will be healed !")
+                if team2.teamSelection[3] == nil {
+                    print("Sorry your dwarf is dead !")
                 } else {
-                    print("It's your turn \(team2.playerName) !")
+                    team2.teamSelection[3]!.healthPoints = team2.teamSelection[3]!.healthPoints + potion.damage
+                    if  team2.teamSelection[3]!.healthPoints >= 50 {
+                        print("Sorry your dwarf can't have more than 50 lifePoints !")
+                        team2.teamSelection[3]!.healthPoints = 50
+                        print ("Your dwarf has now \(team2.teamSelection[3]!.healthPoints) lifePoints !")
+                    }
                 }
             default:
                 break

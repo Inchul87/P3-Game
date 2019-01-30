@@ -102,6 +102,23 @@ class Player {
         }
     }
 
+    func fightOrHealTeam2() {
+        print("What will be your next move \(team2.playerName) ?"
+            + "\n1 Attack one of your opponent !"
+            + "\n2 Heal one of yours !")
+        
+        if let answer = readLine() {
+            switch answer {
+            case "1":
+                game.fightChoiceTeam2()
+            case "2":
+                game.healChoiceTeam2()
+            default:
+                print("Sorry try again !")
+            }
+        }
+    }
+    
     func specsTeam1() {
         for (key, value) in team1.teamSelection {
         
