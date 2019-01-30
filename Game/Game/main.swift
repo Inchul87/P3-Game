@@ -1,6 +1,9 @@
 // P3 Game
 
-let game = Game()
+import Foundation
+
 game.start()
 
-
+while true {
+    team1.fightOrHealTeam1()
+}

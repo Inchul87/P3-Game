@@ -1,3 +1,5 @@
+import Foundation
+
 class Player {
     var playerName: String
     var teamSelection = [Int: Characters]() // Tableau
@@ -62,26 +64,76 @@ class Player {
                 print("Please select one character !")
             }
         }
+    }
+    
+    // Utile ?
     
     func displayCharactersSpecs() {
-        print ("Thanks ! \(team1.playerName) has selected :")
-        
+        print ("\(team1.playerName) has selected :")
         
         for (key, value) in team1.teamSelection {
             team1.teamSelection = [Int : Characters](uniqueKeysWithValues: team1.teamSelection.sorted{ $0.key < $1.key })
             
-            print("\(key) A \(value.type) named \(value.charactersName)) \(value.weapon.weaponName) and has \(value.healthPoints) lifePoints !")
+            print("\(key) A \(value.type) named \(value.charactersName) with his \(value.weapon.weaponName) and has \(value.healthPoints) lifePoints !")
     }
         print("\(team2.playerName) has selected :")
         
         for (key, value) in team2.teamSelection {
             team2.teamSelection = [Int : Characters](uniqueKeysWithValues: team2.teamSelection.sorted{ $0.key < $1.key })
             
-            print("\(key) A \(value.type) named \(value.charactersName)) \(value.weapon.weaponName) and has \(value.healthPoints) lifePoints !")
+            print("\(key) A \(value.type) named \(value.charactersName) with his \(value.weapon.weaponName) and has \(value.healthPoints) lifePoints !")
+            }
+        }
+    
+    func fightOrHealTeam1() {
+        print("What will be your next move \(team1.playerName) ?"
+            + "\n1 Attack one of your opponent !"
+            + "\n2 Heal one of yours !")
+        
+        if let answer = readLine() {
+            switch answer {
+            case "1":
+                game.fightChoiceTeam1()
+            case "2":
+                game.healChoiceTeam1()
+            default:
+                print("Sorry try again !")
             }
         }
     }
-}
+
+    func specsTeam1() {
+        for (key, value) in team1.teamSelection {
+        
+        print("\(key) A \(value.type) named \(value.charactersName) with his \(value.weapon.weaponName) and has \(value.healthPoints) lifePoints !")
+        }
+    }
+        
+    func specsTeam2() {
+        for (key, value) in team2.teamSelection {
+                
+        print("\(key) A \(value.type) named \(value.charactersName) with his \(value.weapon.weaponName) and has \(value.healthPoints) lifePoints !")
+        }
+    }
     
+    func checkScoreTeam1() {
+        if team1.teamSelection.isEmpty {
+            print("GAME OVER ! The winner is \(team2.playerName) !")
+            team1.teamSelection.removeAll()
+            team2.teamSelection.removeAll()
+            game.start()
+        }
+    }
+    
+    func checkScoreTeam2() {
+        if team2.teamSelection.isEmpty {
+            print("GAME OVER ! The winner is \(team1.playerName) !")
+            team2.teamSelection.removeAll()
+            team1.teamSelection.removeAll()
+            game.start()
+        }
+    }
+}
+
 var team1 = Player(playerName: "")
 var team2 = Player(playerName: "")

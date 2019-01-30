@@ -8,12 +8,12 @@ class GetName {
             if let answer = readLine() {
                 nameChoice = answer
                 if characterName.contains(nameChoice) {
+                    print("")
                     print("\(nameChoice)' has been used ! Please enter a new one !")
                     nameChoice = ""
                 } else {
                     characterName.append(nameChoice)
                     print("Got it, thanks !")
-                    
                 }
             }
         } while nameChoice == ""
