@@ -1,7 +1,5 @@
 class Axe: Weapon {
     init() {
-        super.init(weaponName: "axe", damage: 30)
+        super.init(weaponName: "axe", damage: 30, heal: 0)
     }
 }
-
-var axe = Axe()

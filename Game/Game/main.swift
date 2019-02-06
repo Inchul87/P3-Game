@@ -2,9 +2,7 @@
 
 import Foundation
 
-game.start()
+let game = Game()
 
-while true {
-    team1.fightOrHealTeam1()
-    team2.fightOrHealTeam2()
-}
+game.launchGame()
+

@@ -1,7 +1,5 @@
 class Potion: Weapon {
     init() {
-        super.init(weaponName: "potion", damage: -10)
+        super.init(weaponName: "potion", damage: 0, heal: 40)
     }
 }
-
-var potion = Potion()

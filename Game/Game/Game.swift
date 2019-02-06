@@ -1,278 +1,88 @@
 import Foundation
 
 class Game {
-    var characterA: Characters
-    var characterB: Characters
-    var characterC: Characters
-    var characterD: Characters
+    var team = [Player]()
     
-    init(characterA: Characters, characterB: Characters, characterC: Characters, characterD: Characters) {
-        self.characterA = characterA
-        self.characterB = characterB
-        self.characterC = characterC
-        self.characterD = characterD
-    }
-    
-    func start() {
+    func welcome() {
         print("Welcome to this little RPG game !"
             + "\n You can oppose two players of three characters each !"
             + "\n The first player who destroys all his opponent characters win the game !")
-        
-        // A compléter
-        team1.namePlayer1()
-        team1.createTeam()
-        team2.namePlayer2()
-        team2.createTeam()
-        team1.displayCharactersSpecs()
     }
     
-    func fightChoiceTeam1() {
-        print("Please select one character to fight with !")
-        team1.specsTeam1()
-
-        if let fighterTeam1 = readLine() {
-            switch fighterTeam1 {
-            case "1":
-                if team1.teamSelection[1] == nil {
-                    print("Sorry you can't select this character !")
-                    fightChoiceTeam1()
-                }else{
-                    print("You have selected your warrior !")
-                    characterA = team1.teamSelection[1]!
-                }
-            case "2":
-                if team1.teamSelection[2] == nil {
-                    print("Sorry you can't select this character !")
-                    fightChoiceTeam1()
-                }else{
-                    print("You have selected your giant !")
-                    characterA = team1.teamSelection[2]!
-                }
-            case "3":
-                if team1.teamSelection[3] == nil {
-                    print("Sorry you can't select this character !")
-                    fightChoiceTeam1()
-                }else{
-                    print("You have selected your dwarf !")
-                    characterA = team1.teamSelection[3]!
-                }
-                default:
-                    break
-                }
-            }
+    func charactersSpecs() {
+        print("Please select 3 characters from the list above, you can choose the same for all three :"
+            + "\n1. Warrior (make all opponents 10 points of damage with his sword and has 100 lifepoints)"
+            + "\n2. Wizard (heal all his teammates 20 lifepoints with his magic wand and has 90 lifepoints)"
+            + "\n3. Giant (make all opponents 5 points of damage with his hammer and has 80 lifepoints)"
+            + "\n4. Dwarf (make all opponents 30 points of damage with his axe and has 50 lifepoints)")
+    }
     
-        print("Which one do you want to fight ?")
-        team2.specsTeam2()
-        
-        if let characterTeam2 = readLine() {
-            switch characterTeam2 {
-            case "1":
-                print("Got it ! You will fight his warrior !")
-                characterB = team2.teamSelection[1]!
-                characterA.fightForTeam1(characterB: characterB)
-                if characterB.healthPoints < 1 {
-                    team2.teamSelection.removeValue(forKey: 1)
-                    team2.checkScoreTeam2()
-                } else {
-                    print("It's your turn \(team2.playerName) !")
-                }
-            case "2":
-                print("Got it ! You will fight his giant !")
-                characterB = team2.teamSelection[2]!
-                characterA.fightForTeam1(characterB: characterB)
-                if characterB.healthPoints < 1 {
-                    team2.teamSelection.removeValue(forKey: 2)
-                    team2.checkScoreTeam2()
-                } else {
-                    print("It's your turn \(team2.playerName) !")
-                }
-            case "3":
-                print("Got it ! You will fight his dwarf !")
-                characterB = team2.teamSelection[3]!
-                characterA.fightForTeam1(characterB: characterB)
-                if characterB.healthPoints < 1 {
-                    team2.teamSelection.removeValue(forKey: 3)
-                    team2.checkScoreTeam2()
-                } else {
-                    print("It's your turn \(team2.playerName) !")
-                }
-            default:
-                break
-            }
+    func start() {
+        for i in 0...1 {
+            print ("It's your turn player \(i+1) !")
+            _ = namePlayer()
         }
     }
     
-    func fightChoiceTeam2() {
-        print("Please select one character to fight with !")
-        team2.specsTeam2()
-        
-        if let fighterTeam2 = readLine() {
-            switch fighterTeam2 {
-            case "1":
-                if team2.teamSelection[1] == nil {
-                    print("Sorry you can't select this character !")
-                    fightChoiceTeam2()
-                }else{
-                    print("You have selected your warrior !")
-                    characterC = team2.teamSelection[1]!
-                }
-            case "2":
-                if team2.teamSelection[2] == nil {
-                    print("Sorry you can't select this character !")
-                    fightChoiceTeam2()
-                }else{
-                    print("You have selected your giant !")
-                    characterA = team1.teamSelection[2]!
-                }
-            case "3":
-                if team2.teamSelection[3] == nil {
-                    print("Sorry you can't select this character !")
-                    fightChoiceTeam2()
-                }else{
-                    print("You have selected your dwarf !")
-                    characterC = team2.teamSelection[3]!
-                }
-            default:
-                break
+    func namePlayer() -> Player {
+        print ("Please enter your name !")
+        var nameOfPlayer = ""
+        repeat {
+            if let name = readLine() {
+                nameOfPlayer = name
             }
+        } while nameOfPlayer == ""
+        print ("Got it ! \(nameOfPlayer) !")
+        let choice = Player(playerName: nameOfPlayer)
+        team.append(Player(playerName: nameOfPlayer))
+        return choice
         }
-        
-        print("Which one do you want to fight ?")
-        team1.specsTeam1()
-        
-        if let characterTeam1 = readLine() {
-            switch characterTeam1 {
-            case "1":
-                print("Got it ! You will fight his warrior !")
-                characterD = team1.teamSelection[1]!
-                characterC.fightForTeam2(characterD: characterD)
-                if characterD.healthPoints < 1 {
-                    team1.teamSelection.removeValue(forKey: 1)
-                    team1.checkScoreTeam1()
-                } else {
-                    print("It's your turn \(team1.playerName) !")
-                }
-            case "2":
-                print("Got it ! You will fight his giant !")
-                characterD = team1.teamSelection[2]!
-                characterC.fightForTeam2(characterD: characterD)
-                if characterD.healthPoints < 1 {
-                    team1.teamSelection.removeValue(forKey: 2)
-                    team1.checkScoreTeam1()
-                } else {
-                    print("It's your turn \(team1.playerName) !")
-                }
-            case "3":
-                print("Got it ! You will fight his dwarf !")
-                characterD = team1.teamSelection[3]!
-                characterC.fightForTeam2(characterD: characterD)
-                if characterD.healthPoints < 1 {
-                    team1.teamSelection.removeValue(forKey: 3)
-                    team1.checkScoreTeam1()
-                } else {
-                    print("It's your turn \(team1.playerName) !")
-                }
-            default:
-                break
-            }
-        }
-    }
     
-    func healChoiceTeam1() {
-        print("Please select the character you want to heal !")
-        team1.specsTeam1()
-        
-        if let answer = readLine() {
-            switch answer {
-            case "1":
-                print("Your warrior will be healed !")
-                if team1.teamSelection[1] == nil {
-                    print("Sorry your warrior is dead !")
-                } else {
-                    team1.teamSelection[1]!.healthPoints = team1.teamSelection[1]!.healthPoints + potion.damage
-                    if  team1.teamSelection[1]!.healthPoints >= 100 {
-                        print("Sorry your warrior can't have more than 100 lifePoints !")
-                        team1.teamSelection[1]!.healthPoints = 100
-                        print("Your warrior has now \(team1.teamSelection[1]!.healthPoints) lifePoints !")
+    func createTeam() {
+        for (_, choice) in team.enumerated() {
+            print ("Please select one character \(choice.playerName) !")
+        for _ in 0...2 {
+            var teamChoice = 0
+            repeat {
+                charactersSpecs()
+                if let answer = readLine() {
+                    if let choiceToInt = Int(answer) {
+                        teamChoice = choiceToInt
                     }
                 }
-            case "2":
-                print("Your giant will be healed !")
-                if team1.teamSelection[2] == nil {
-                    print("Sorry your giant is dead !")
-                } else {
-                    team1.teamSelection[2]!.healthPoints = team1.teamSelection[2]!.healthPoints + potion.damage
-                    if  team1.teamSelection[2]!.healthPoints >= 80 {
-                        print("Sorry your giant can't have more than 80 lifePoints !")
-                        team1.teamSelection[2]!.healthPoints = 80
-                        print("Your colossus has now \(team1.teamSelection[2]!.healthPoints) lifePoints !")
-                    }
-                }
-            case "3" :
-                print("Your dwarf will be healed !")
-                if team1.teamSelection[3] == nil {
-                    print("Sorry your dwarf is dead !")
-                } else {
-                    team1.teamSelection[3]!.healthPoints = team1.teamSelection[3]!.healthPoints + potion.damage
-                    if  team1.teamSelection[3]!.healthPoints >= 50 {
-                        print("Sorry your dwarf can't have more than 50 lifePoints !")
-                        team1.teamSelection[3]!.healthPoints = 50
-                        print ("Your dwarf has now \(team1.teamSelection[3]!.healthPoints) lifePoints !")
-                    }
-                }
+            } while teamChoice != 1 && teamChoice != 2 && teamChoice != 3 && teamChoice != 4
+            let nameChoice = GetName().nameCharacter()
+            
+            switch teamChoice {
+            case 1:
+                print("Your warrior is named \(nameChoice) !")
+                choice.teamSelection.append(Warrior(name: nameChoice))
+            case 2:
+                print("Your wizard is named \(nameChoice) !")
+                choice.teamSelection.append(Wizard(name: nameChoice))
+            case 3:
+                print("Your giant is named \(nameChoice) !")
+                choice.teamSelection.append(Giant(name: nameChoice))
+            case 4:
+                print("Your dwarf is named \(nameChoice) !")
+                choice.teamSelection.append(Dwarf(name: nameChoice))
             default:
-                break
+                return
             }
         }
-    }
-    
-    func healChoiceTeam2() {
-        print("Please select the character you want to heal !")
-        team2.specsTeam2()
-        
-        if let answer = readLine() {
-            switch answer {
-            case "1":
-                print("Your warrior will be healed !")
-                if team2.teamSelection[1] == nil {
-                    print("Sorry your warrior is dead !")
-                } else {
-                    team2.teamSelection[1]!.healthPoints = team2.teamSelection[1]!.healthPoints + potion.damage
-                    if  team2.teamSelection[1]!.healthPoints >= 100 {
-                        print("Sorry your warrior can't have more than 100 lifePoints !")
-                        team2.teamSelection[1]!.healthPoints = 100
-                        print("Your warrior has now \(team2.teamSelection[1]!.healthPoints) lifePoints !")
-                    }
-                }
-            case "2":
-                print("Your giant will be healed !")
-                if team2.teamSelection[2] == nil {
-                    print("Sorry your giant is dead !")
-                } else {
-                    team2.teamSelection[2]!.healthPoints = team2.teamSelection[2]!.healthPoints + potion.damage
-                    if  team2.teamSelection[2]!.healthPoints >= 80 {
-                        print("Sorry your giant can't have more than 80 lifePoints !")
-                        team2.teamSelection[2]!.healthPoints = 80
-                        print("Your colossus has now \(team2.teamSelection[2]!.healthPoints) lifePoints !")
-                    }
-                }
-            case "3" :
-                print("Your dwarf will be healed !")
-                if team2.teamSelection[3] == nil {
-                    print("Sorry your dwarf is dead !")
-                } else {
-                    team2.teamSelection[3]!.healthPoints = team2.teamSelection[3]!.healthPoints + potion.damage
-                    if  team2.teamSelection[3]!.healthPoints >= 50 {
-                        print("Sorry your dwarf can't have more than 50 lifePoints !")
-                        team2.teamSelection[3]!.healthPoints = 50
-                        print ("Your dwarf has now \(team2.teamSelection[3]!.healthPoints) lifePoints !")
-                    }
-                }
-            default:
-                break
-            }
-        }
+            print("Got it ! Thanks !")
     }
 }
-
-var game = Game(characterA: warrior, characterB: warrior, characterC: warrior, characterD: warrior)
+    
+    func displaySpecs() {
+        for (_, choice) in team.enumerated() {
+            choice.specsTeam()
+        }
+    }
+    
+    func launchGame() {
+        welcome()
+        start()
+        createTeam()
+    }
+}

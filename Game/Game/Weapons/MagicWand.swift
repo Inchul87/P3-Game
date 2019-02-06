@@ -1,7 +1,5 @@
 class MagicWand: Weapon {
     init() {
-        super.init(weaponName: "magic wand", damage: -20)
+        super.init(weaponName: "magic wand", damage: 0, heal: 20)
     }
 }
-
-var magicWand = MagicWand()
