@@ -1,4 +1,4 @@
-class GetName {
+class CheckName {
     var characterName: [String] = []
     
     func nameCharacter() -> String {
