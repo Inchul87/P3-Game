@@ -4,5 +4,7 @@ import Foundation
 
 let game = Game()
 
-game.launchGame()
+while game.isItOver() == false {
+    game.play()
+}
 

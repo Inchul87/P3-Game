@@ -10,10 +10,17 @@ class Player {
     }
     
     // Ajouter 
-    func specsTeam() {
+    func displayScore() {
         for (key, value) in teamSelection.enumerated() {
-        
-        print("\(key) A \(value.type) named \(value.characterName) with his \(value.weapon.weaponName) and has \(value.healthPoints) lifePoints !")
+            if value.healthPoints >= 1 {
+                if value is Warrior || value is Giant || value is Dwarf {
+                    print("\(key + 1) The \(value.type) named \(value.characterName) has taken \(value.weapon.damage) lifePoints with his \(value.weapon.weaponName) and has \(value.healthPoints) / \(value.maxHealthPoints) !")
+                } else if value is Wizard {
+                    print("\(key + 1) The \(value.type) named \(value.characterName) has healed \(value.weapon.heal) healthPoints with his \(value.weapon.weaponName) and has \(value.healthPoints) / \(value.maxHealthPoints) !")
+                } else {
+                    print("\(key + 1) The \(value.type) \(value.characterName) is dead !")
+                }
+            }
         }
     }
 

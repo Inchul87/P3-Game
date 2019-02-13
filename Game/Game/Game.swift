@@ -72,9 +72,9 @@ class Game {
     }
 }
     
-    func displaySpecs() {
+    func recapTeams() {
         for player in teams {
-            player.specsTeam()
+            player.displayScore()
         }
     }
     
@@ -89,16 +89,16 @@ class Game {
         return false
     }
     
-    // Fonction characterChoice à ajouter ds classe Player et fonction heal à Wizard
     func fight() {
-        displaySpecs()
+        recapTeams()
         var attacker: Characters
         var target: Characters
         repeat {
-            for player in teams {
+            for (key, player) in teams.enumerated() {
+                let actualPlayer = player.playerName
                 print("Please select the character you want to fight with \(player.playerName) !")
-                player.specsTeam()
-                var characterChoice:Int
+                player.displayScore()
+                var characterChoice: Int
                 repeat {
                     characterChoice = player.characterChoice() - 1
                 } while (characterChoice < 0 || characterChoice >= player.teamSelection.count)
@@ -106,37 +106,34 @@ class Game {
                     attacker = player.teamSelection[characterChoice]
                     if let wizard = attacker as? Wizard{
                         print("Please select the character you want to heal \(player.playerName) ! You can't heal yourself !")
-                        player.specsTeam()
+                        player.displayScore()
                         wizard.heal(character: player.teamSelection[player.characterChoice() - 1])
                     } else {
                   // Poubelle
-                        let targetPlayer = player == 0 ? teams[1] : teams[0]
-                        print("Please select the character you want to attack \(player) !")
-                        targetPlayer.specsTeam()
+                        let targetPlayer = key == 0 ? teams[1] : teams[0]
+                        print("Please select the character you want to attack \(actualPlayer) !")
+                        targetPlayer.displayScore()
                         repeat {
-                            characterChoice = targetPlayer.characterChoice()-1
+                            characterChoice = targetPlayer.characterChoice() - 1
                         } while (characterChoice < 0 || characterChoice >= targetPlayer.teamSelection.count)
                         if (characterChoice >= 0 && characterChoice < targetPlayer.teamSelection.count) {
-                            attacker = targetPlayer.teamSelection[characterChoice]
+                            target = targetPlayer.teamSelection[characterChoice]
                             if attacker.healthPoints > 0 {
-                                target.healthPoints -= attacker.weapon.damage  // to take the defense points of the character enemy
-                                print(" Your \(attacker.type) \(attacker.characterName) hit the \(target.type) \(target.characterName) with his \(attacker.weapon.weaponName) taking \(attacker.weapon.damage) defense points to him.")
-                                // if the target character is still alive
+                                target.healthPoints -= attacker.weapon.damage
+                                print("\(attacker.type) \(attacker.characterName) just hit \(target.type) \(target.characterName) with his \(attacker.weapon.weaponName) taking \(attacker.weapon.damage) healthPoints !")
                                 if target.healthPoints <= 0 {
                                     target.healthPoints = 0
-                                    print ("\(target.type) \(target.characterName) died")
+                                    print ("\(target.type) \(target.characterName) just died !")
                                     targetPlayer.deadCharacters.append(target)
-                                    targetPlayer.teamSelection = targetPlayer.teamSelection.filter { $0.healthPoints > 0 }}
-                                // fighting in return if the opponent character is still alive
+                                    targetPlayer.teamSelection = player.teamSelection.filter { $0.healthPoints > 0 }}
                                 if target.healthPoints > 0 {
                                     if target is Wizard {
-                                        print ("Your \(target.type) \(target.characterName) doesn't know how to fight.")
+                                        print ("Sorry the \(target.type) \(target.characterName) can't be attacked !")
                                     } else {
-                                        attacker.healthPoints -= target.weapon.damage  // to take the defense points of the character enemy
-                                        print(" The \(target.type) \(target.characterName) hit the \(attacker.type) \(attacker.characterName) with his \(target.weapon.weaponName) taking \(target.weapon.damage) defense points to him.")
+                                        attacker.healthPoints -= target.weapon.damage
                                         if attacker.healthPoints <= 0 {
                                             attacker.healthPoints = 0
-                                            print ("\(attacker.type) \(attacker.characterName) just died")
+                                            print ("\(attacker.type) \(attacker.characterName) just died !")
                                             player.deadCharacters.append(attacker)
                                             player.teamSelection = player.teamSelection.filter { $0.healthPoints > 0 }
                                         }
@@ -150,8 +147,7 @@ class Game {
         } while !isItOver()
     }
     
-    // Fin
-    func launchGame() {
+    func play() {
         welcome()
         start()
         createTeam()
