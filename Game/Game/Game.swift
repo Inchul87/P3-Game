@@ -19,7 +19,7 @@ class Game {
     
     func start() {
         for i in 0...1 {
-            print ("It's your turn player \(i+1) !")
+            print ("It's your turn player \(i + 1) !")
             namePlayer()
         }
     }
@@ -36,16 +36,16 @@ class Game {
         teams.append(Player(playerName: nameOfPlayer))
         }
     
-    func createTeam() { // choice remplacé par player
-        for choice in teams {
-            print ("Please select one character \(choice.playerName) !")
+    func createTeam() {
+        for player in teams {
+            print ("Please select one character \(player.playerName) !")
         for _ in 0...2 {
             var teamChoice = 0
             repeat {
                 charactersSpecs()
                 if let answer = readLine() {
-                    if let choiceToInt = Int(answer) {
-                        teamChoice = choiceToInt
+                    if let answerToInt = Int(answer) {
+                        teamChoice = answerToInt
                     }
                 }
             } while teamChoice != 1 && teamChoice != 2 && teamChoice != 3 && teamChoice != 4
@@ -54,16 +54,16 @@ class Game {
             switch teamChoice {
             case 1:
                 print("Your warrior is named \(nameChoice) !")
-                choice.teamSelection.append(Warrior(name: nameChoice))
+                player.teamSelection.append(Warrior(name: nameChoice))
             case 2:
                 print("Your wizard is named \(nameChoice) !")
-                choice.teamSelection.append(Wizard(name: nameChoice))
+                player.teamSelection.append(Wizard(name: nameChoice))
             case 3:
                 print("Your giant is named \(nameChoice) !")
-                choice.teamSelection.append(Giant(name: nameChoice))
+                player.teamSelection.append(Giant(name: nameChoice))
             case 4:
                 print("Your dwarf is named \(nameChoice) !")
-                choice.teamSelection.append(Dwarf(name: nameChoice))
+                player.teamSelection.append(Dwarf(name: nameChoice))
             default:
                 return
             }
@@ -73,8 +73,8 @@ class Game {
 }
     
     func recapTeams() {
-        for player in teams {
-            player.displayScore()
+        for selection in teams {
+            selection.displayScore()
         }
     }
     
@@ -94,38 +94,36 @@ class Game {
         var attacker: Characters
         var target: Characters
         repeat {
-            for (key, player) in teams.enumerated() {
+            for player in teams {
                 let actualPlayer = player.playerName
                 print("Please select the character you want to fight with \(player.playerName) !")
                 player.displayScore()
-                var characterChoice: Int
+                var characterSelection: Int
                 repeat {
-                    characterChoice = player.characterChoice() - 1
-                } while (characterChoice < 0 || characterChoice >= player.teamSelection.count)
-                if (characterChoice >= 0 && characterChoice < player.teamSelection.count) {
-                    attacker = player.teamSelection[characterChoice]
+                    characterSelection = player.characterChoice() - 1
+                } while (characterSelection < 0 || characterSelection >= player.teamSelection.count)
+                if (characterSelection >= 0 && characterSelection < player.teamSelection.count) {
+                    attacker = player.teamSelection[characterSelection]
                     if let wizard = attacker as? Wizard{
                         print("Please select the character you want to heal \(player.playerName) ! You can't heal yourself !")
                         player.displayScore()
                         wizard.heal(character: player.teamSelection[player.characterChoice() - 1])
                     } else {
-                  // Poubelle
-                        let targetPlayer = key == 0 ? teams[1] : teams[0]
                         print("Please select the character you want to attack \(actualPlayer) !")
-                        targetPlayer.displayScore()
+                        player.displayScore()
                         repeat {
-                            characterChoice = targetPlayer.characterChoice() - 1
-                        } while (characterChoice < 0 || characterChoice >= targetPlayer.teamSelection.count)
-                        if (characterChoice >= 0 && characterChoice < targetPlayer.teamSelection.count) {
-                            target = targetPlayer.teamSelection[characterChoice]
+                            characterSelection = player.characterChoice() - 1
+                        } while (characterSelection < 0 || characterSelection >= player.teamSelection.count)
+                        if (characterSelection >= 0 && characterSelection < player.teamSelection.count) {
+                            target = player.teamSelection[characterSelection]
                             if attacker.healthPoints > 0 {
                                 target.healthPoints -= attacker.weapon.damage
                                 print("\(attacker.type) \(attacker.characterName) just hit \(target.type) \(target.characterName) with his \(attacker.weapon.weaponName) taking \(attacker.weapon.damage) healthPoints !")
                                 if target.healthPoints <= 0 {
                                     target.healthPoints = 0
                                     print ("\(target.type) \(target.characterName) just died !")
-                                    targetPlayer.deadCharacters.append(target)
-                                    targetPlayer.teamSelection = player.teamSelection.filter { $0.healthPoints > 0 }}
+                                    player.deadCharacters.append(target)
+                                    player.teamSelection = player.teamSelection.filter { $0.healthPoints > 0 }}
                                 if target.healthPoints > 0 {
                                     if target is Wizard {
                                         print ("Sorry the \(target.type) \(target.characterName) can't be attacked !")
