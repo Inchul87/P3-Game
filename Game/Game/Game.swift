@@ -1,7 +1,12 @@
 import Foundation
 
 class Game {
+    let players: Int
     var teams = [Player]()
+    
+    init(players: Int) {
+    self.players = players
+    }
     
     func welcome() {
         print("Welcome to this little RPG game !"
@@ -9,68 +14,32 @@ class Game {
             + "\n The first player who destroys all his opponent characters win the game !")
     }
     
-    func charactersSpecs() {
-        print("Please select 3 characters from the list above, you can choose the same for all three :"
-            + "\n1. Warrior (make all opponents 10 points of damage with his sword and has 100 lifepoints)"
-            + "\n2. Wizard (heal all his teammates 20 lifepoints with his magic wand and has 90 lifepoints)"
-            + "\n3. Giant (make all opponents 5 points of damage with his hammer and has 80 lifepoints)"
-            + "\n4. Dwarf (make all opponents 30 points of damage with his axe and has 50 lifepoints)")
-    }
-    
     func start() {
         for i in 0...1 {
             print ("It's your turn player \(i + 1) !")
-            namePlayer()
         }
     }
     
-    func namePlayer() {
-        print ("Please enter your name !")
-        var nameOfPlayer = ""
-        repeat {
-            if let name = readLine() {
-                nameOfPlayer = name
-            }
-        } while nameOfPlayer == ""
-        print ("Got it ! \(nameOfPlayer) !")
-        teams.append(Player(playerName: nameOfPlayer))
+    func namePlayer() -> String {
+        var playerName: String?
+        while playerName == nil || playerName == "" {
+            print("Please enter your name !")
+            playerName = readLine()
         }
+        print("Got it ! \(playerName!) !")
+        return playerName!
+    }
     
+    // Créer nouvelle fonction
     func createTeam() {
-        for player in teams {
-            print ("Please select one character \(player.playerName) !")
-        for _ in 0...2 {
-            var teamChoice = 0
-            repeat {
-                charactersSpecs()
-                if let answer = readLine() {
-                    if let answerToInt = Int(answer) {
-                        teamChoice = answerToInt
-                    }
-                }
-            } while teamChoice != 1 && teamChoice != 2 && teamChoice != 3 && teamChoice != 4
-            let nameChoice = CheckName().nameCharacter()
-            
-            switch teamChoice {
-            case 1:
-                print("Your warrior is named \(nameChoice) !")
-                player.teamSelection.append(Warrior(name: nameChoice))
-            case 2:
-                print("Your wizard is named \(nameChoice) !")
-                player.teamSelection.append(Wizard(name: nameChoice))
-            case 3:
-                print("Your giant is named \(nameChoice) !")
-                player.teamSelection.append(Giant(name: nameChoice))
-            case 4:
-                print("Your dwarf is named \(nameChoice) !")
-                player.teamSelection.append(Dwarf(name: nameChoice))
-            default:
-                return
-            }
+        for _ in 0..<players {
+            let team = Player()
+            team.playerName = namePlayer()
+            team.teamSelection()
+            print("indiquer composition équipe")
+            teams.append(team)
         }
-            print("Got it ! Thanks !")
     }
-}
     
     func recapTeams() {
         for selection in teams {
@@ -89,6 +58,29 @@ class Game {
         return false
     }
     
+    
+    func randomBox(character: Characters, player: Player){
+        let random = arc4random_uniform(100)
+        if character.healthPoints > 0 {
+            if random < 25 {
+            print("\(character.charactersName) just found a box !")
+                if character is Warrior || character is Giant || character is Dwarf {
+                    if character.weapon is Sword || character.weapon is Hammer || character.weapon is Axe {
+                        let newWeapon = Mace()
+                        print ("There is a mace in it ! it will give 40 damagePoints to one of your opponent each time !")
+                        character.weapon = newWeapon
+                    }
+                } else if character is Wizard {
+                    if character.weapon is MagicWand {
+                        let newWeapon = Potion()
+                        print("there is a potion in it ! It will give 40 lifePoints to one of yours ! Double the magic wand !")
+                        character.weapon = newWeapon
+                    }
+                }
+            }
+        }
+    }
+    
     func fight() {
         recapTeams()
         var attacker: Characters
@@ -104,6 +96,7 @@ class Game {
                 } while (characterSelection < 0 || characterSelection >= player.teamSelection.count)
                 if (characterSelection >= 0 && characterSelection < player.teamSelection.count) {
                     attacker = player.teamSelection[characterSelection]
+                    randomBox(character: attacker, player: player) //randomBox
                     if let wizard = attacker as? Wizard{
                         print("Please select the character you want to heal \(player.playerName) ! You can't heal yourself !")
                         player.displayScore()
@@ -128,6 +121,7 @@ class Game {
                                     if target is Wizard {
                                         print ("Sorry the \(target.type) \(target.characterName) can't be attacked !")
                                     } else {
+                                        // get set ds characters
                                         attacker.healthPoints -= target.weapon.damage
                                         if attacker.healthPoints <= 0 {
                                             attacker.healthPoints = 0
@@ -155,3 +149,7 @@ class Game {
 
 
 
+// Fonction fight à réduire !!
+
+// Définir maxHealthpoints
+// Vérification des points de vie ds class Characters

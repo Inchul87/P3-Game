@@ -2,9 +2,6 @@
 
 import Foundation
 
-let game = Game()
+let game = Game(players: 2)
 
-while game.isItOver() == false {
-    game.play()
-}
-
+game.play()
