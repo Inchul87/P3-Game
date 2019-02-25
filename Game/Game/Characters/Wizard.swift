@@ -1,23 +1,18 @@
 class Wizard: Characters {
-    init(name: String) {
-        super.init(characterName: name, healthPoints: 90, maxHealthPoints: 90, weapon: MagicWand(), type: "wizard")
+    init() {
+        super.init(healthPoints: 90, weapon: .magicWand, type: "wizard")
+    }
+
+    override var description: String {
+        return "-- Weapon: \(weapon.rawValue) -- LifePoints: \(healthPoints)  CarePoints: \(weapon.damage)"
     }
     
-    func heal(character: Characters) {
-        if healthPoints > 0 {
-            if character.healthPoints <= 0 {
-                print("Sorry your character is already dead !")
-            } else if character is Wizard {
-                print("Sorry you can't heal yourself !")
-            } else {
-                character.healthPoints += weapon.heal
-                print("Your \(character.type) \(character.characterName) has now \(character.healthPoints) lifePoints !")
-                if character.healthPoints >= character.maxHealthPoints {
-                    print("Sorry your \(character.type) \(character.characterName) can't have more than \(maxHealthPoints) lifePoints !")
-                }
-            }
+    func heal(healing: Characters) {
+        if self.weapon.damage > 0 && self.healthPoints > 0 && healing.healthPoints > 0 {
+            healing.healthPoints += self.weapon.damage
         } else {
-            print("Sorry your wizard is already dead !")
+            print("Sorry you wizard is already dead !")
         }
+        print("Your teammate has now \(healing.healthPoints) lifePoints !")
     }
 }

@@ -7,15 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7508CEB7221477FD00638029 /* Mace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7508CEB6221477FD00638029 /* Mace.swift */; };
 		75B445C921EFAA7200F929BB /* Weapon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B445C821EFAA7200F929BB /* Weapon.swift */; };
-		75B445CB21EFAA8800F929BB /* MagicWand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B445CA21EFAA8800F929BB /* MagicWand.swift */; };
-		75B445CD21EFAAB300F929BB /* Hammer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B445CC21EFAAB300F929BB /* Hammer.swift */; };
-		75B445CF21EFAAD100F929BB /* Axe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B445CE21EFAAD100F929BB /* Axe.swift */; };
-		75B445D121EFAB7B00F929BB /* Potion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B445D021EFAB7B00F929BB /* Potion.swift */; };
 		75B445D521F8AE2F00F929BB /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B445D421F8AE2F00F929BB /* Game.swift */; };
 		75B445D721F8AE3900F929BB /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B445D621F8AE3900F929BB /* Player.swift */; };
-		75B445FC21F8B7DF00F929BB /* Sword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B445FB21F8B7DF00F929BB /* Sword.swift */; };
 		75F0ACF621EF9D56004702C1 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F0ACF521EF9D56004702C1 /* main.swift */; };
 		75F0ACFD21EF9DC8004702C1 /* Characters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F0ACFC21EF9DC8004702C1 /* Characters.swift */; };
 		75F0ACFF21EF9E0D004702C1 /* Warrior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F0ACFE21EF9E0D004702C1 /* Warrior.swift */; };
@@ -37,15 +31,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		7508CEB6221477FD00638029 /* Mace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mace.swift; sourceTree = "<group>"; };
 		75B445C821EFAA7200F929BB /* Weapon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weapon.swift; sourceTree = "<group>"; };
-		75B445CA21EFAA8800F929BB /* MagicWand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagicWand.swift; sourceTree = "<group>"; };
-		75B445CC21EFAAB300F929BB /* Hammer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hammer.swift; sourceTree = "<group>"; };
-		75B445CE21EFAAD100F929BB /* Axe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Axe.swift; sourceTree = "<group>"; };
-		75B445D021EFAB7B00F929BB /* Potion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Potion.swift; sourceTree = "<group>"; };
 		75B445D421F8AE2F00F929BB /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		75B445D621F8AE3900F929BB /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
-		75B445FB21F8B7DF00F929BB /* Sword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sword.swift; sourceTree = "<group>"; };
 		75F0ACF221EF9D56004702C1 /* Game */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Game; sourceTree = BUILT_PRODUCTS_DIR; };
 		75F0ACF521EF9D56004702C1 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		75F0ACFC21EF9DC8004702C1 /* Characters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Characters.swift; sourceTree = "<group>"; };
@@ -70,12 +58,6 @@
 			isa = PBXGroup;
 			children = (
 				75B445C821EFAA7200F929BB /* Weapon.swift */,
-				75B445FB21F8B7DF00F929BB /* Sword.swift */,
-				75B445CA21EFAA8800F929BB /* MagicWand.swift */,
-				75B445CC21EFAAB300F929BB /* Hammer.swift */,
-				75B445CE21EFAAD100F929BB /* Axe.swift */,
-				75B445D021EFAB7B00F929BB /* Potion.swift */,
-				7508CEB6221477FD00638029 /* Mace.swift */,
 			);
 			path = Weapons;
 			sourceTree = "<group>";
@@ -177,20 +159,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				75B445CD21EFAAB300F929BB /* Hammer.swift in Sources */,
 				75B445C921EFAA7200F929BB /* Weapon.swift in Sources */,
-				75B445CF21EFAAD100F929BB /* Axe.swift in Sources */,
 				75F0AD0121EF9E34004702C1 /* Wizard.swift in Sources */,
 				75F0ACFF21EF9E0D004702C1 /* Warrior.swift in Sources */,
-				75B445FC21F8B7DF00F929BB /* Sword.swift in Sources */,
 				75B445D721F8AE3900F929BB /* Player.swift in Sources */,
 				75F0AD0521EF9E6A004702C1 /* Dwarf.swift in Sources */,
 				75F0ACF621EF9D56004702C1 /* main.swift in Sources */,
 				75B445D521F8AE2F00F929BB /* Game.swift in Sources */,
-				75B445CB21EFAA8800F929BB /* MagicWand.swift in Sources */,
-				7508CEB7221477FD00638029 /* Mace.swift in Sources */,
 				75F0ACFD21EF9DC8004702C1 /* Characters.swift in Sources */,
-				75B445D121EFAB7B00F929BB /* Potion.swift in Sources */,
 				75F0AD0321EF9E4F004702C1 /* Giant.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

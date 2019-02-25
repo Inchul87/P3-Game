@@ -1,5 +1,5 @@
 class Dwarf: Characters {
-    init(name: String) {
-        super.init(characterName: name, healthPoints: 50, maxHealthPoints: 50,weapon: Axe(), type: "dwarf")
+    init() {
+        super.init(healthPoints: 50, weapon: .axe, type: "dwarf")
     }
 }

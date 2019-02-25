@@ -1,24 +1,33 @@
 import Foundation
 
 class Player {
-    var playerName: String
+    var playerName: String = ""
     var charactersName = [String]()
     var teamSelection = [Characters]()
     let maxTeamSelection = 3
     
-    init(playerName: String) {
-        self.playerName = playerName
-    }
+    var score: Int {
+        var gameOver = 0
+        for character in teamSelection {
+            gameOver += character.healthPoints
+        }
+        return gameOver
+        }
     
     func selectTeam() {
-        print("Please select 3 characters from the list above, you can choose the same for all three :"
-            + "\n1. Warrior (make all opponents 10 points of damage with his sword and has 100 lifepoints)"
-            + "\n2. Wizard (heal all his teammates 20 lifepoints with his magic wand and has 90 lifepoints)"
-            + "\n3. Giant (make all opponents 5 points of damage with his hammer and has 80 lifepoints)"
-            + "\n4. Dwarf (make all opponents 30 points of damage with his axe and has 50 lifepoints)")
+        print("""
+            Please select 3 characters from the list above, you can choose the same for all three :"
+            1 - Warrior (make all opponents 10 points of damage with his sword and has 100 lifepoints)"
+            2 - Wizard (heal all his teammates 20 lifepoints with his magic wand and has 90 lifepoints)"
+            3 - Giant (make all opponents 5 points of damage with his hammer and has 80 lifepoints)"
+            4 - Dwarf (make all opponents 30 points of damage with his axe and has 50 lifepoints)
+            """)
         
-        // let choice
-            
+        while teamSelection.count < Player().maxTeamSelection {
+            guard let choice = readLine() else {
+                print("Please select 3 characters from the list above !")
+                return
+            }
             switch choice {
             case "1":
                 print("You have selected a warrior !")
@@ -37,9 +46,9 @@ class Player {
                 teamSelection.append(Dwarf())
                 getName()
             default: print("Got it ! Thanks !")
-                return
             }
         }
+    }
     
     func getName() {
         var choice: String?
@@ -48,25 +57,10 @@ class Player {
                 print("Please enter a name for your character !")
                 choice = readLine()
                 if charactersName.contains(choice!){
-                    print("You already have select this name ! Please enter a new one !")
+                    print("You already have enter this name ! Please choose a new one !")
                     getName()
                 } else {
                     charactersName.append(choice!)
-                }
-            }
-        }
-    }
-    
-    // Ajouter classe Game
-    func displayScore() {
-        for (key, value) in teamSelection.enumerated() {
-            if value.healthPoints >= 1 {
-                if value is Warrior || value is Giant || value is Dwarf {
-                    print("\(key + 1) The \(value.type) named \(value.charactersName) can take \(value.weapon.damage) lifePoints with his \(value.weapon.weaponName) and has \(value.healthPoints) / \(value.maxHealthPoints) !")
-                } else if value is Wizard {
-                    print("\(key + 1) The \(value.type) named \(value.charactersName) can heal one of his team \(value.weapon.heal) healthPoints with his \(value.weapon.weaponName) and has \(value.healthPoints) / \(value.maxHealthPoints) !")
-                } else {
-                    print("\(key + 1) The \(value.type) \(value.charactersName) is dead !")
                 }
             }
         }
