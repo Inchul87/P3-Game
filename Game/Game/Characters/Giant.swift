@@ -1,5 +1,5 @@
-class Giant: Characters {
-    init() {
-        super.init(healthPoints: 80, weapon: .hammer, type: "giant")
+class Giant: Character {
+    init(characterName: String) {
+        super.init(characterName: characterName, healthPoints: 80, maxNbOfHealthPoints: 80, weapon: Hammer(), characterType: "giant", moveType: "Attack")
     }
 }

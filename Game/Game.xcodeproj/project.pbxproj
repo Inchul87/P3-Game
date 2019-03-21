@@ -11,11 +11,20 @@
 		75B445D521F8AE2F00F929BB /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B445D421F8AE2F00F929BB /* Game.swift */; };
 		75B445D721F8AE3900F929BB /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B445D621F8AE3900F929BB /* Player.swift */; };
 		75F0ACF621EF9D56004702C1 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F0ACF521EF9D56004702C1 /* main.swift */; };
-		75F0ACFD21EF9DC8004702C1 /* Characters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F0ACFC21EF9DC8004702C1 /* Characters.swift */; };
+		75F0ACFD21EF9DC8004702C1 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F0ACFC21EF9DC8004702C1 /* Character.swift */; };
 		75F0ACFF21EF9E0D004702C1 /* Warrior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F0ACFE21EF9E0D004702C1 /* Warrior.swift */; };
 		75F0AD0121EF9E34004702C1 /* Wizard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F0AD0021EF9E34004702C1 /* Wizard.swift */; };
 		75F0AD0321EF9E4F004702C1 /* Giant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F0AD0221EF9E4F004702C1 /* Giant.swift */; };
 		75F0AD0521EF9E6A004702C1 /* Dwarf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F0AD0421EF9E6A004702C1 /* Dwarf.swift */; };
+		75F91F1F2224371A004147BF /* NameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F91F1E2224371A004147BF /* NameManager.swift */; };
+		75F91F21223046AF004147BF /* Sword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F91F20223046AF004147BF /* Sword.swift */; };
+		75F91F23223046C7004147BF /* MagicWand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F91F22223046C7004147BF /* MagicWand.swift */; };
+		75F91F25223046D3004147BF /* Hammer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F91F24223046D3004147BF /* Hammer.swift */; };
+		75F91F27223046F3004147BF /* Axe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F91F26223046F3004147BF /* Axe.swift */; };
+		75F91F2922304718004147BF /* MagicPotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F91F2822304718004147BF /* MagicPotion.swift */; };
+		75F91F2B22304728004147BF /* Mace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F91F2A22304728004147BF /* Mace.swift */; };
+		75F91F2D22304749004147BF /* MagicRelic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F91F2C22304749004147BF /* MagicRelic.swift */; };
+		75F91F2F2230475D004147BF /* Bow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F91F2E2230475D004147BF /* Bow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -36,11 +45,20 @@
 		75B445D621F8AE3900F929BB /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		75F0ACF221EF9D56004702C1 /* Game */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Game; sourceTree = BUILT_PRODUCTS_DIR; };
 		75F0ACF521EF9D56004702C1 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		75F0ACFC21EF9DC8004702C1 /* Characters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Characters.swift; sourceTree = "<group>"; };
+		75F0ACFC21EF9DC8004702C1 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
 		75F0ACFE21EF9E0D004702C1 /* Warrior.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Warrior.swift; sourceTree = "<group>"; };
 		75F0AD0021EF9E34004702C1 /* Wizard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wizard.swift; sourceTree = "<group>"; };
 		75F0AD0221EF9E4F004702C1 /* Giant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Giant.swift; sourceTree = "<group>"; };
 		75F0AD0421EF9E6A004702C1 /* Dwarf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dwarf.swift; sourceTree = "<group>"; };
+		75F91F1E2224371A004147BF /* NameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameManager.swift; sourceTree = "<group>"; };
+		75F91F20223046AF004147BF /* Sword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sword.swift; sourceTree = "<group>"; };
+		75F91F22223046C7004147BF /* MagicWand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagicWand.swift; sourceTree = "<group>"; };
+		75F91F24223046D3004147BF /* Hammer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hammer.swift; sourceTree = "<group>"; };
+		75F91F26223046F3004147BF /* Axe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Axe.swift; sourceTree = "<group>"; };
+		75F91F2822304718004147BF /* MagicPotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagicPotion.swift; sourceTree = "<group>"; };
+		75F91F2A22304728004147BF /* Mace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mace.swift; sourceTree = "<group>"; };
+		75F91F2C22304749004147BF /* MagicRelic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagicRelic.swift; sourceTree = "<group>"; };
+		75F91F2E2230475D004147BF /* Bow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +76,14 @@
 			isa = PBXGroup;
 			children = (
 				75B445C821EFAA7200F929BB /* Weapon.swift */,
+				75F91F20223046AF004147BF /* Sword.swift */,
+				75F91F22223046C7004147BF /* MagicWand.swift */,
+				75F91F24223046D3004147BF /* Hammer.swift */,
+				75F91F26223046F3004147BF /* Axe.swift */,
+				75F91F2822304718004147BF /* MagicPotion.swift */,
+				75F91F2A22304728004147BF /* Mace.swift */,
+				75F91F2C22304749004147BF /* MagicRelic.swift */,
+				75F91F2E2230475D004147BF /* Bow.swift */,
 			);
 			path = Weapons;
 			sourceTree = "<group>";
@@ -84,6 +110,7 @@
 				75F0ACF521EF9D56004702C1 /* main.swift */,
 				75B445D421F8AE2F00F929BB /* Game.swift */,
 				75B445D621F8AE3900F929BB /* Player.swift */,
+				75F91F1E2224371A004147BF /* NameManager.swift */,
 				75F0AD0621EF9E84004702C1 /* Characters */,
 				75B445C721EFAA2000F929BB /* Weapons */,
 			);
@@ -93,7 +120,7 @@
 		75F0AD0621EF9E84004702C1 /* Characters */ = {
 			isa = PBXGroup;
 			children = (
-				75F0ACFC21EF9DC8004702C1 /* Characters.swift */,
+				75F0ACFC21EF9DC8004702C1 /* Character.swift */,
 				75F0ACFE21EF9E0D004702C1 /* Warrior.swift */,
 				75F0AD0021EF9E34004702C1 /* Wizard.swift */,
 				75F0AD0221EF9E4F004702C1 /* Giant.swift */,
@@ -159,14 +186,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75F91F2F2230475D004147BF /* Bow.swift in Sources */,
 				75B445C921EFAA7200F929BB /* Weapon.swift in Sources */,
+				75F91F23223046C7004147BF /* MagicWand.swift in Sources */,
 				75F0AD0121EF9E34004702C1 /* Wizard.swift in Sources */,
 				75F0ACFF21EF9E0D004702C1 /* Warrior.swift in Sources */,
 				75B445D721F8AE3900F929BB /* Player.swift in Sources */,
 				75F0AD0521EF9E6A004702C1 /* Dwarf.swift in Sources */,
+				75F91F21223046AF004147BF /* Sword.swift in Sources */,
+				75F91F2D22304749004147BF /* MagicRelic.swift in Sources */,
+				75F91F2922304718004147BF /* MagicPotion.swift in Sources */,
+				75F91F1F2224371A004147BF /* NameManager.swift in Sources */,
+				75F91F27223046F3004147BF /* Axe.swift in Sources */,
 				75F0ACF621EF9D56004702C1 /* main.swift in Sources */,
+				75F91F2B22304728004147BF /* Mace.swift in Sources */,
 				75B445D521F8AE2F00F929BB /* Game.swift in Sources */,
-				75F0ACFD21EF9DC8004702C1 /* Characters.swift in Sources */,
+				75F91F25223046D3004147BF /* Hammer.swift in Sources */,
+				75F0ACFD21EF9DC8004702C1 /* Character.swift in Sources */,
 				75F0AD0321EF9E4F004702C1 /* Giant.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -1,162 +1,130 @@
 import Foundation
 
 class Game {
-    let players: Int
+    static let maxNbOfPlayers = 2
     var teams = [Player]()
+    var actualPlayer: Player!
+    var actualPlayerIndex = 0
+    var nbOfTurnsInGame = 0     // Stats Bonus
+    let maxNbOfTeams = 2
     
-    init(players: Int) {
-        self.players = players
-    }
-    
-    func welcome() {
+    func start() {
         print("Welcome to this little RPG game !"
             + "\n You can oppose two players of three characters each !"
             + "\n The first player who destroys all his opponent characters win the game !")
-    }
-    
-    func namePlayer() -> String {
-        var playerName: String?
-        while playerName == nil || playerName == "" {
-            print("Please enter your name !")
-            playerName = readLine()
-        }
-        print("Got it ! \(playerName!) !")
-        return playerName!
-    }
-    
-    func createTeam() {
-        for _ in 0..<players {
-            let team = Player()
-            team.playerName = game.namePlayer()
-            team.selectTeam()
-            print("indiquer composition équipe")
-            teams.append(team)
-        }
-    }
-    
-    func selectAttacker(from team: Int) -> Characters {
-        var attacker: String?
-        while !["1", "2", "3"].contains(attacker) {
-            print("Please select the character you want to fight with !"
-                + "\n \(teams[team].charactersName[0]) le \(teams[team].teamSelection[0].type):  \(teams[team].teamSelection[0].healthPoints)"
-                + "\n \(teams[team].charactersName[1]) le \(teams[team].teamSelection[1].type): \(teams[team].teamSelection[1].healthPoints)"
-                + "\n \(teams[team].charactersName[2]) le \(teams[team].teamSelection[2].type): \(teams[team].teamSelection[2].healthPoints)")
-            attacker = readLine()
-        }
-        let character = Int(attacker!)! - 1
-        let choice = teams[team].teamSelection[character]
-        if choice.healthPoints <= 0 {
-            print ("Sorry your character is already dead !")
-            return selectAttacker(from: team)
-        }
-        print("The \(teams[team].teamSelection[character])\(teams[team].charactersName[character]) is now ready to fight !")
-        return choice
-    }
-    
-    func attackOrHeal() -> Int {
-        var character: String?
-        while !["1","2"].contains(character)  {
-            print("Please make a choice ! Enter 1 to attack \(teams[0].playerName) or 2 for heal one of yours \(teams[1].playerName) !")
-            character = readLine()
-        }
-        return Int(character!)!
-    }
-    
-    func selectTarget(vs: Int) -> Characters {
-        var target: String?
-        let team = vs - 1
-        while !["1", "2", "3"].contains(target) {
-            print("""
-                1 - \(teams[team].charactersName[0]) a \(teams[team].teamSelection[0])
-                2 - \(teams[team].charactersName[1]) a \(teams[team].teamSelection[1])
-                3 - \(teams[team].charactersName[2]) a \(teams[team].teamSelection[2])
-                """)
-            target = readLine()
-        }
-        let character = Int(target!)! - 1
-        print("Got it ! You will fight against \(teams[team].charactersName[character]) a \(teams[team].teamSelection[character]) !")
-        return teams[team].teamSelection[character]
-    }
-    
-    func selectVictim(to: Int) -> Characters {
-        var victim: String?
-        while !["1", "2", "3"].contains(victim) {
-            print("""
-                Please select the member of your team you want to heal !
-                1 - \(teams[to].charactersName[0]) a \(teams[to].teamSelection[0])
-                2 - \(teams[to].charactersName[1]) a \(teams[to].teamSelection[1])
-                3 - \(teams[to].charactersName[2]) a \(teams[to].teamSelection[2])
-                """)
-            victim = readLine()
-        }
-        let character = Int(victim!)! - 1
-        print("You will now heal \(teams[to].charactersName[character]) a \(teams[to].teamSelection[character]) !")
-        return teams[to].teamSelection[character]
-    }
-    
-    func lifePointsRecap() {
-        print("LifePoints remaining for each team !")
-        for score in 0..<teams.count {
-            print("""
-                \(teams[score].charactersName[0]) a \(teams[score].teamSelection[0]) has \(teams[score].teamSelection[0].healthPoints) lifePoints !
-                \(teams[score].charactersName[1]) a \(teams[score].teamSelection[1]) has \(teams[score].teamSelection[1].healthPoints) lifePoints !
-                \(teams[score].charactersName[2]) a \(teams[score].teamSelection[2]) has \(teams[score].teamSelection[2].healthPoints) lifePoints !
-                """)
-        }
-    }
-    
-    func fight() {
-        for player in 0..<teams.count {
-            guard teams[player].score > 0 else {
-                print ("Game Over ! All of your characters are dead !")
-                return
+        createTeams()
+        while nbOfTeamsAlive(in: teams) > 1 {
+            
+            actualPlayer = teams[actualPlayerIndex]
+            nbOfTurnsInGame += 1
+            
+            if actualPlayer.charactersAlive() > 0 {
+                print("Lap N° \(nbOfTurnsInGame) / Player \(actualPlayer.playerName) !")
+                play()
             }
-            let attacker = selectAttacker(from: player)
-            if let wizard = attacker as? Wizard {
-                let victim = selectVictim(to: player)
-                wizard.heal(healing: victim)
+            
+            if actualPlayerIndex == maxNbOfTeams - 1 {
+                actualPlayerIndex = 0
             } else {
-                let character = attackOrHeal()
-                specsTeam(team: character)
-                let target = selectTarget(vs: character)
-                showBox(attacker, team: player)
-                attacker.attack(vs: target)
+                actualPlayerIndex += 1
             }
-            lifePointsRecap()
+        }
+        for player in teams {
+            if player.charactersAlive() > 0 {
+                print("Congratulations \(player.playerName) ! You have defeated your opponent in \(nbOfTurnsInGame) laps !")
+            }
         }
     }
     
-    func randomBox() -> Weapon {
-        var weapons = Weapon.magicWeapon
-        let randomCount = Int.random (in: 0..<weapons.count)
-        let weapon = weapons[randomCount]
-        return weapon
+    // Déplacer
+        func nbOfTeamsAlive(in teams: [Player]) -> Int {
+        var count = 0
+        for team in teams {
+            if team.charactersAlive() > 0 {
+                count += 1
+            }
+        }
+        return count
     }
     
-    func showBox(_ character: Characters, team: Int) {
-        guard character.healthPoints > 0 else {
-            print ("Sorry you are already dead !")
-            return
-        }
-        let random = Int.random (in: 0..<50)
-        if random > 10 && random < 25 {
-            character.weapon = randomBox()
-            print("Congratulations ! You just found a new weapon ! A \(randomBox()) with \(randomBox().damage) damage to your opponent !")
-            // Bonus ?
-        }else if random > 20 && random < 35 {
-            character.healthPoints += 50
-            print("Super Potion")
+    func createTeams() {
+        for _ in 1...Game.maxNbOfPlayers {
+            _ = NameManager.getName()
         }
     }
     
-   func specsTeam(team: Int) {
-        let team = team - 1
-        for characters in 0 ..< Player().maxTeamSelection {
-            print("\(teams[team].charactersName[characters]) a \(teams[team].teamSelection[characters]) : \(teams[team].teamSelection[characters].description)")
+    func selectCharacter() -> Character? {
+            print("""
+            Please select one character from the list above ! You have to select 3 characters ! You can choose the same for all three if you want !"
+            1 - Warrior (make all opponents 10 points of damage with his sword and has 100 lifepoints)"
+            2 - Wizard (heal all his teammates 20 lifepoints with his magic wand and has 90 lifepoints)"
+            3 - Giant (make all opponents 5 points of damage with his hammer and has 80 lifepoints)"
+            4 - Dwarf (make all opponents 30 points of damage with his axe and has 50 lifepoints)
+            """)
+            while true {
+                if let choice = readLine() {
+                    switch choice {
+                    case "1":
+                        return Warrior(characterName: NameManager.getName())
+                    case "2":
+                        return Wizard(characterName: NameManager.getName())
+                    case "3":
+                        return Giant(characterName: NameManager.getName())
+                    case "4":
+                        return Dwarf(characterName: NameManager.getName())
+                    default:
+                        print("Something went wrong ! Please try again !")
+                    }
+                }
+            }
+        }
+    
+    // func selectCharacter() et selectTeam() ds classe Player
+    func play() {
+        print("Please select one character in your team !")
+        let character = actualPlayer.selectCharacter()
+        switch character.selectNextMove() {
+        case "Attack":
+            let target = selectTeam()
+            print("Please select the character you want to fight with !")
+            character.nextMove(target: target.selectCharacter())
+        case "Heal":
+            print("Please select the member of your team you want to heal !")
+            character.nextMove(target: actualPlayer.selectCharacter())
+       /* case "Open Chest":
+            character.showBox()
+        */
+        default:
+            break
         }
     }
     
-    // Ajouter plusieurs armes bonus aléatoirement !
-
-}
-
+    func selectTeam() -> Player {
+        var teamTarget = [Player]()
+        for team in teams {
+            if team !== actualPlayer && team.charactersAlive() > 0 {
+                teamTarget.append(team)
+            }
+        }
+        var index = 0
+        print("Please select the team you want to attack !")
+            for team in teamTarget {
+                index += 1
+                print("\(index) Team \(team.playerName)")
+                for character in team.charactersInTeam {
+                    print("\(character.characterType) \(character.characterName) / LifePoints : \(character.healthPoints) / \(character.maxNbOfHealthPoints)")
+                }
+            }
+            while true {
+                if let choice = Int(readLine()!) {
+                    switch choice {
+                    case 1 ... index:
+                        return teamTarget[choice - 1]
+                    default:
+                        break
+                    }
+                }
+                print("Something went wrong ! Please make a choice between 1 and \(index) !")
+            }
+        }
+    }

@@ -1,22 +1,9 @@
-import Foundation
+class Weapon {
+    var weaponType: String
+    var damage: Int
     
-enum Weapon: String, CaseIterable{
-    case sword
-    case magicWand
-    case hammer
-    case axe
-    case potion
-    case mace
-   
-    var damage: Int {
-        switch self {
-        case .sword: return 10
-        case .magicWand: return 20
-        case .hammer: return 5
-        case .axe: return 30
-        case .potion: return 40
-        case .mace: return 40
-        }
+    init(weaponType: String, damage: Int) {
+        self.weaponType = weaponType
+        self.damage = damage
     }
-    static var magicWeapon: [Weapon] = [.potion, .mace]
 }
